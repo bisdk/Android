@@ -13,11 +13,11 @@ android {
         targetCompatibility 1.8
     }
     defaultConfig {
-        applicationId "com.hormann.app"
+        applicationId "se.warting.sesam"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
