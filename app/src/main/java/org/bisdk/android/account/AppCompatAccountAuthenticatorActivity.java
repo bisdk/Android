@@ -1,9 +1,8 @@
-package com.hormann.app.account;
+package org.bisdk.android.account;
 
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 /**

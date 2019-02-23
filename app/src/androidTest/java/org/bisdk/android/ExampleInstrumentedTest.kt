@@ -1,7 +1,7 @@
-package com.hormann.app
+package org.bisdk.android
 
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,7 +16,7 @@ class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
         // Context of the app under test.
-        val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.hormann.app", appContext.packageName)
+        val appContext = ApplicationProvider.getApplicationContext<BiApplication>().applicationContext
+        assertEquals("org.bisdk.android", appContext.packageName)
     }
 }

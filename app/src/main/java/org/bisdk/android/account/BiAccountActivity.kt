@@ -1,4 +1,4 @@
-package com.hormann.app.account
+package org.bisdk.android.account
 
 import android.accounts.Account
 import android.accounts.AccountManager
@@ -11,13 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.work.*
-import com.hormann.app.R
-import com.hormann.app.StoreListAdapter
-import com.hormann.app.discover.DiscoverWorker
 import kotlinx.android.synthetic.main.activity_login.*
+import org.bisdk.android.GatewayListAdapter
+import org.bisdk.android.R
+import org.bisdk.android.discover.DiscoverWorker
 
 
-class HormannAccountActivity : AppCompatAccountAuthenticatorActivity() {
+class BiAccountActivity : AppCompatAccountAuthenticatorActivity() {
 
     private var accountManager: AccountManager? = null
 
@@ -25,9 +25,9 @@ class HormannAccountActivity : AppCompatAccountAuthenticatorActivity() {
         super.onCreate(icicle)
         setContentView(R.layout.activity_login)
 
-        val storeListAdapter = StoreListAdapter(this, this)
+        val storeListAdapter = GatewayListAdapter(this, this)
         gateway.setAdapter(storeListAdapter)
-        gateway.setOnItemClickListener { parent, view, position, id ->
+        gateway.setOnItemClickListener { parent, _, position, _ ->
             val itemId = storeListAdapter.getItem(position)
             gateway.setText(itemId?.sourceAddress)
             mac.setText(itemId?.mac)
@@ -86,22 +86,27 @@ class HormannAccountActivity : AppCompatAccountAuthenticatorActivity() {
 
                             loginData.putString(AccountManager.KEY_ACCOUNT_NAME, "$userId@$host")
                             loginData.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType)
-                            loginData.putString(HormannAccountAuthenticator.TOKEN_TYPE, tokenType)
-                            loginData.putString(HormannAccountAuthenticator.KEY_USER_DATA_HOST, host)
-                            loginData.putString(HormannAccountAuthenticator.KEY_USER_DATA_MAC, gatewayId)
+                            loginData.putString(BiAccountAuthenticator.TOKEN_TYPE, tokenType)
+                            loginData.putString(BiAccountAuthenticator.KEY_USER_DATA_HOST, host)
+                            loginData.putString(BiAccountAuthenticator.KEY_USER_DATA_MAC, gatewayId)
                             loginData.putString(AccountManager.KEY_AUTHTOKEN, authToken)
-                            loginData.putString(HormannAccountAuthenticator.PASSWORD, passWord)
+                            loginData.putString(BiAccountAuthenticator.PASSWORD, passWord)
 
                             val result = Intent()
                             result.putExtras(loginData)
 
                             setLoginResult(result)
 
-                            Toast.makeText(this@HormannAccountActivity, getString(R.string.logged_in), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@BiAccountActivity, getString(R.string.logged_in), Toast.LENGTH_SHORT)
+                                .show()
                         } else {
                             login_progress.visibility = View.GONE
                             login_form.visibility = View.VISIBLE
-                            Toast.makeText(this@HormannAccountActivity, getString(R.string.not_logged_in), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@BiAccountActivity,
+                                getString(R.string.not_logged_in),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
 
 
@@ -114,22 +119,22 @@ class HormannAccountActivity : AppCompatAccountAuthenticatorActivity() {
     private fun setLoginResult(intent: Intent) {
 
         val userId = intent.getStringExtra(AccountManager.KEY_ACCOUNT_NAME)
-        val passWd = intent.getStringExtra(HormannAccountAuthenticator.PASSWORD)
+        val passWd = intent.getStringExtra(BiAccountAuthenticator.PASSWORD)
 
         val account = Account(userId, intent.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE))
 
-        if (getIntent().getBooleanExtra(HormannAccountAuthenticator.ADD_ACCOUNT, false)) {
+        if (getIntent().getBooleanExtra(BiAccountAuthenticator.ADD_ACCOUNT, false)) {
             val authToken = intent.getStringExtra(AccountManager.KEY_AUTHTOKEN)
-            val tokenType = intent.getStringExtra(HormannAccountAuthenticator.TOKEN_TYPE)
+            val tokenType = intent.getStringExtra(BiAccountAuthenticator.TOKEN_TYPE)
 
             val userData = Bundle()
             userData.putString(
-                HormannAccountAuthenticator.KEY_USER_DATA_MAC,
-                intent.getStringExtra(HormannAccountAuthenticator.KEY_USER_DATA_MAC)
+                BiAccountAuthenticator.KEY_USER_DATA_MAC,
+                intent.getStringExtra(BiAccountAuthenticator.KEY_USER_DATA_MAC)
             )
             userData.putString(
-                HormannAccountAuthenticator.KEY_USER_DATA_HOST,
-                intent.getStringExtra(HormannAccountAuthenticator.KEY_USER_DATA_HOST)
+                BiAccountAuthenticator.KEY_USER_DATA_HOST,
+                intent.getStringExtra(BiAccountAuthenticator.KEY_USER_DATA_HOST)
             )
 
             accountManager!!.addAccountExplicitly(account, passWd, userData)

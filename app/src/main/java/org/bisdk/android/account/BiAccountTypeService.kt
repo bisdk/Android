@@ -1,12 +1,12 @@
-package com.hormann.app.account
+package org.bisdk.android.account
 
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 
-class HormannAccountTypeService : Service() {
+class BiAccountTypeService : Service() {
     override fun onBind(intent: Intent): IBinder? {
-        val authenticator = HormannAccountAuthenticator(this)
+        val authenticator = BiAccountAuthenticator(this)
         return authenticator.iBinder
     }
 }

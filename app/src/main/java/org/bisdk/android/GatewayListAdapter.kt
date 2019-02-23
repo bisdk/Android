@@ -1,4 +1,4 @@
-package com.hormann.app
+package org.bisdk.android
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,11 +8,14 @@ import android.widget.ArrayAdapter
 import android.widget.Filter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.hormann.app.discover.AppDatabase
-import com.hormann.app.discover.Gateway
 import kotlinx.android.synthetic.main.gateway_dropdown.view.*
+import org.bisdk.android.discover.AppDatabase
+import org.bisdk.android.discover.Gateway
 
-class StoreListAdapter(owner: LifecycleOwner, context: Context) : ArrayAdapter<Gateway>(context, R.layout.gateway_dropdown) {
+class GatewayListAdapter(owner: LifecycleOwner, context: Context) : ArrayAdapter<Gateway>(
+    context,
+    R.layout.gateway_dropdown
+) {
 
     private val itemLayout: Int
 

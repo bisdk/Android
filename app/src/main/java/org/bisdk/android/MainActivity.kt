@@ -1,4 +1,4 @@
-package com.hormann.app
+package org.bisdk.android
 
 import android.accounts.Account
 import android.accounts.AccountManager
@@ -14,10 +14,10 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.navigation.NavigationView
-import com.hormann.app.account.HormannAccountAuthenticator
 import kotlinx.android.synthetic.main.activity_nav.*
 import kotlinx.android.synthetic.main.app_bar_nav.*
 import kotlinx.android.synthetic.main.content_nav.*
+import org.bisdk.android.account.BiAccountAuthenticator
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         buttonAddGateway.setOnClickListener { view ->
             AccountManager.get(view.context).addAccount(
-                    HormannAccountAuthenticator.ACCOUNT_TYPE,
-                    HormannAccountAuthenticator.TOKEN_TYPE_GATEWAY,
+                BiAccountAuthenticator.ACCOUNT_TYPE,
+                BiAccountAuthenticator.TOKEN_TYPE_GATEWAY,
                     null,
                     null,
                     this,
@@ -69,13 +69,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         buttonState.setOnClickListener { model.requestState() }
         buttonGroups.setOnClickListener { model.requestGroups() }
         buttonLogout.setOnClickListener {
-            accountManager.invalidateAuthToken(HormannAccountAuthenticator.TOKEN_TYPE_GATEWAY, model.token.value)
+            accountManager.invalidateAuthToken(BiAccountAuthenticator.TOKEN_TYPE_GATEWAY, model.token.value)
             model.logout()
             accountManager.removeAccount(currentAccount, this@MainActivity, null, null)
         }
 
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
@@ -96,7 +98,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     val listener = OnAccountsUpdateListener {
         it.iterator().forEach { account ->
-            if (account.type == HormannAccountAuthenticator.ACCOUNT_TYPE) {
+            if (account.type == BiAccountAuthenticator.ACCOUNT_TYPE) {
                 setAccount(account)
                 return@OnAccountsUpdateListener
             }
@@ -119,11 +121,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     private fun loadToken(accountManager: AccountManager, account: Account) {
-        accountManager.getAuthToken(account, HormannAccountAuthenticator.TOKEN_TYPE, null, this, {
+        accountManager.getAuthToken(account, BiAccountAuthenticator.TOKEN_TYPE, null, this, {
             val token: String? = it.result.getString(AccountManager.KEY_AUTHTOKEN)
             if (token != null) {
-                model.host.value = accountManager.getUserData(account, HormannAccountAuthenticator.KEY_USER_DATA_HOST)
-                model.mac.value = accountManager.getUserData(account, HormannAccountAuthenticator.KEY_USER_DATA_MAC)
+                model.host.value = accountManager.getUserData(account, BiAccountAuthenticator.KEY_USER_DATA_HOST)
+                model.mac.value = accountManager.getUserData(account, BiAccountAuthenticator.KEY_USER_DATA_MAC)
                 model.token.value = token
             }
         }, null)

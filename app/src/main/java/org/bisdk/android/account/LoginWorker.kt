@@ -1,14 +1,14 @@
-package com.hormann.app.account
+package org.bisdk.android.account
 
 import android.content.Context
 import android.util.Log
 import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.hormann.app.getMacAddress
 import de.thomasletsch.AuthenticationException
 import de.thomasletsch.Client
 import de.thomasletsch.ClientAPI
+import org.bisdk.android.getMacAddress
 import java.net.InetAddress
 
 

@@ -1,4 +1,4 @@
-package com.hormann.app.discover
+package org.bisdk.android.discover
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,4 +1,4 @@
-package com.hormann.app.account
+package org.bisdk.android.account
 
 import android.accounts.*
 import android.accounts.AccountManager.KEY_BOOLEAN_RESULT
@@ -6,13 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import com.hormann.app.getMacAddress
 import de.thomasletsch.Client
 import de.thomasletsch.ClientAPI
+import org.bisdk.android.getMacAddress
 import java.net.InetAddress
 
 
-class HormannAccountAuthenticator(private val context: Context) : AbstractAccountAuthenticator(context) {
+class BiAccountAuthenticator(private val context: Context) : AbstractAccountAuthenticator(context) {
 
     override fun editProperties(accountAuthenticatorResponse: AccountAuthenticatorResponse, s: String): Bundle? {
         return null
@@ -24,7 +24,7 @@ class HormannAccountAuthenticator(private val context: Context) : AbstractAccoun
         response: AccountAuthenticatorResponse, accountType: String,
         authTokenType: String?, requiredFeatures: Array<String>?, options: Bundle?
     ): Bundle? {
-        val intent = Intent(context, HormannAccountActivity::class.java)
+        val intent = Intent(context, BiAccountActivity::class.java)
         intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, accountType)
         intent.putExtra(ADD_ACCOUNT, true)
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response)
@@ -56,9 +56,15 @@ class HormannAccountAuthenticator(private val context: Context) : AbstractAccoun
         if (TextUtils.isEmpty(authToken)) {
             val password = accountManager.getPassword(account)
             if (password != null) {
-                HormannAccountAuthenticator.KEY_USER_DATA_HOST
-                val mac = accountManager.getUserData(account, HormannAccountAuthenticator.KEY_USER_DATA_MAC) ?: ""
-                val host = accountManager.getUserData(account, HormannAccountAuthenticator.KEY_USER_DATA_HOST) ?: ""
+                KEY_USER_DATA_HOST
+                val mac = accountManager.getUserData(
+                    account,
+                    KEY_USER_DATA_MAC
+                ) ?: ""
+                val host = accountManager.getUserData(
+                    account,
+                    KEY_USER_DATA_HOST
+                ) ?: ""
 
                 val username = account.name.split("@")[0]
                 val inetAddress = InetAddress.getByName(host)
@@ -79,7 +85,7 @@ class HormannAccountAuthenticator(private val context: Context) : AbstractAccoun
             return result
         }
 
-        val intent = Intent(context, HormannAccountActivity::class.java)
+        val intent = Intent(context, BiAccountActivity::class.java)
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response)
         intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, account.type)
         intent.putExtra(AccountManager.KEY_ACCOUNT_NAME, account.name)
@@ -121,7 +127,7 @@ class HormannAccountAuthenticator(private val context: Context) : AbstractAccoun
         const val TOKEN_TYPE = "tokenType"
         const val KEY_USER_DATA_HOST = "KEY_USER_DATA_HOST"
         const val KEY_USER_DATA_MAC = "KEY_USER_DATA_MAC"
-        const val ACCOUNT_TYPE: String = "com.hormann.auth"
-        const val TOKEN_TYPE_GATEWAY: String = "com.hormann.token.gateway"
+        const val ACCOUNT_TYPE: String = "org.bisdk.auth"
+        const val TOKEN_TYPE_GATEWAY: String = "org.bisdk.token.gateway"
     }
 }

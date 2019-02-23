@@ -1,4 +1,4 @@
-package com.hormann.app
+package org.bisdk.android
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -1,4 +1,4 @@
-package com.hormann.app.discover
+package org.bisdk.android.discover
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

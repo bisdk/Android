@@ -1,4 +1,4 @@
-package com.hormann.app
+package org.bisdk.android
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData

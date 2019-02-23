@@ -13,7 +13,7 @@ android {
         targetCompatibility 1.8
     }
     defaultConfig {
-        applicationId "se.warting.sesam"
+        applicationId "org.bisdk.android"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
@@ -39,7 +39,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha02'
-    testImplementation 'junit:junit:4.12'
     def lifecycle_version = "2.0.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -48,8 +47,15 @@ dependencies {
     def room_version = "2.1.0-alpha04"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    implementation "android.arch.work:work-runtime-ktx:1.0.0-rc01"
+    implementation "android.arch.work:work-runtime-ktx:1.0.0-rc02"
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
+
+
+    // Core library
+    androidTestImplementation 'androidx.test:core:1.1.0'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+
     implementation project(':sdk')
 }

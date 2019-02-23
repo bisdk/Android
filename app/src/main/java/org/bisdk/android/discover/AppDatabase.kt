@@ -1,4 +1,4 @@
-package com.hormann.app.discover
+package org.bisdk.android.discover
 
 import android.content.Context
 import androidx.room.Database
@@ -12,7 +12,7 @@ abstract class AppDatabase : RoomDatabase() {
     companion object : SingletonHolder<AppDatabase, Context>({
         Room.databaseBuilder(
                 it.applicationContext,
-                AppDatabase::class.java, "Hormann.db"
+            AppDatabase::class.java, "bi.db"
         ).build()
     })
 }

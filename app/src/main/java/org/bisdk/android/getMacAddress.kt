@@ -1,4 +1,4 @@
-package com.hormann.app
+package org.bisdk.android
 
 import java.net.NetworkInterface
 import java.util.*

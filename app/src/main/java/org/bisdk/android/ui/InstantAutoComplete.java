@@ -1,9 +1,8 @@
-package com.hormann.app.ui;
+package org.bisdk.android.ui;
 
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 
 public class InstantAutoComplete extends AppCompatAutoCompleteTextView {
