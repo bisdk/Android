@@ -56,6 +56,10 @@ dependencies {
     androidTestImplementation 'androidx.test:core:1.1.0'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.ext:truth:1.1.0'
+
+    testImplementation 'junit:junit:4.12'
+
 
     implementation project(':sdk')
 }
