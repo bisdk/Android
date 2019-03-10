@@ -11,7 +11,6 @@ android:
   - sys-img-x86-android-26
 
 before_script:
-  - cp local.properties.example local.properties
   - android-wait-for-emulator
   - adb shell input keyevent 82
 
