@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import de.thomasletsch.Discovery
 import org.bisdk.android.BuildConfig
+import org.bisdk.sdk.Discovery
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 

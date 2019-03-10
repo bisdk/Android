@@ -3,9 +3,9 @@ package org.bisdk.android
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import de.thomasletsch.Client
-import de.thomasletsch.ClientAPI
-import de.thomasletsch.Group
+import org.bisdk.sdk.Client
+import org.bisdk.sdk.ClientAPI
+import org.bisdk.sdk.Group
 import java.net.InetAddress
 
 class NameViewModel : ViewModel() {

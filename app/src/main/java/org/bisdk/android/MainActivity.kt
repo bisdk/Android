@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var currentAccount: Account? = null
 
 
-    val listener = OnAccountsUpdateListener {
+    private val listener = OnAccountsUpdateListener {
         it.iterator().forEach { account ->
             if (account.type == BiAccountAuthenticator.ACCOUNT_TYPE) {
                 setAccount(account)

@@ -5,10 +5,10 @@ import android.util.Log
 import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import de.thomasletsch.AuthenticationException
-import de.thomasletsch.Client
-import de.thomasletsch.ClientAPI
+import org.bisdk.AuthenticationException
 import org.bisdk.android.getMacAddress
+import org.bisdk.sdk.Client
+import org.bisdk.sdk.ClientAPI
 import java.net.InetAddress
 
 
